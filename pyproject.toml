@@ -1,0 +1,137 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lesstokens-sdk"
+version = "0.1.0"
+description = "Modern Python SDK for integrating with the LessTokens token compression API. Compress prompts before sending to LLM providers (OpenAI, Anthropic, Google, DeepSeek) to reduce token usage and costs while maintaining response quality."
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "HiveHub Team"}
+]
+keywords = [
+    "lesstokens",
+    "token-compression",
+    "llm",
+    "openai",
+    "anthropic",
+    "google",
+    "deepseek",
+    "sdk",
+    "python"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "httpx>=0.25.0",
+    "typing-extensions>=4.8.0; python_version<'3.11'",
+]
+
+[project.optional-dependencies]
+openai = ["openai>=1.0.0"]
+anthropic = ["anthropic>=0.71.0"]
+google = ["google-generativeai>=0.8.0"]
+deepseek = ["openai>=1.0.0"]  # DeepSeek uses OpenAI-compatible API
+all = [
+    "openai>=1.0.0",
+    "anthropic>=0.71.0",
+    "google-generativeai>=0.8.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/hivellm/lesstokens-sdk-python"
+Documentation = "https://github.com/hivellm/lesstokens-sdk-python/blob/main/docs/API.md"
+Repository = "https://github.com/hivellm/lesstokens-sdk-python"
+Issues = "https://github.com/hivellm/lesstokens-sdk-python/issues"
+
+[tool.setuptools]
+packages = ["lesstokens_sdk", "lesstokens_sdk.clients", "lesstokens_sdk.providers", "lesstokens_sdk.utils"]
+
+[tool.setuptools.package-data]
+lesstokens_sdk = ["py.typed"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=lesstokens_sdk",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+]
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "slow: Slow tests",
+]
+
+[tool.coverage.run]
+source = ["lesstokens_sdk"]
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+    "*/__pycache__/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "@abstractmethod",
+]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false  # Allow untyped defs for now
+disallow_incomplete_defs = false  # Allow incomplete defs
+check_untyped_defs = true
+disallow_untyped_decorators = false  # Allow untyped decorators
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = false  # Don't warn about unused ignores for optional imports
+warn_no_return = true
+strict_equality = true
+ignore_missing_imports = true  # Ignore missing imports for optional dependencies
+
+[[tool.mypy.overrides]]
+module = [
+    "openai.*",
+    "anthropic.*",
+    "google.generativeai.*",
+]
+ignore_missing_imports = true
+
+

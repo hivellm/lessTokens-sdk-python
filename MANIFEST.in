@@ -1,0 +1,12 @@
+include README.md
+include LICENSE
+include pyproject.toml
+recursive-include lesstokens_sdk *.py
+recursive-include lesstokens_sdk py.typed
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude * .DS_Store
+global-exclude test-install
+global-exclude .venv
+global-exclude .git
+
