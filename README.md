@@ -386,6 +386,12 @@ pytest tests/test_sdk.py
 
 MIT License - see [LICENSE](./LICENSE) file for details.
 
+## 🔗 Links
+
+- [LessTokens Website](https://lesstokens.hive-hub.ai)
+- [Report Bug](https://github.com/lesstokens/sdk-typescript/issues)
+
+
 ## 🤝 Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for contribution guidelines.
