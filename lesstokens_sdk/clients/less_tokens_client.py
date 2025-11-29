@@ -68,9 +68,7 @@ class LessTokensClient:
                 data = response_data.get("data") or response_data
 
                 # Handle both API response formats
-                compression_ratio = (
-                    data.get("compressionRatio") or data.get("ratio") or 1.0
-                )
+                compression_ratio = data.get("compressionRatio") or data.get("ratio") or 1.0
                 original_tokens = data.get("originalTokens") or 0
                 compressed_tokens = data.get("compressedTokens") or 0
 
@@ -78,8 +76,7 @@ class LessTokensClient:
                 # This ensures accuracy regardless of API response format
                 if original_tokens > 0 and compressed_tokens >= 0:
                     savings = (
-                        (float(original_tokens) - float(compressed_tokens))
-                        / float(original_tokens)
+                        (float(original_tokens) - float(compressed_tokens)) / float(original_tokens)
                     ) * 100
                 else:
                     savings = 0.0
@@ -149,4 +146,3 @@ class LessTokensClient:
         }
 
         return await retry(perform_request, retry_config)
-

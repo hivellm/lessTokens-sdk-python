@@ -146,9 +146,7 @@ class TestOpenAIProvider:
     async def test_chat_api_error(self) -> None:
         """Test chat with OpenAI API error."""
         mock_client = AsyncMock()
-        mock_client.chat.completions.create = AsyncMock(
-            side_effect=Exception("API Error")
-        )
+        mock_client.chat.completions.create = AsyncMock(side_effect=Exception("API Error"))
 
         with patch("lesstokens_sdk.providers.openai.OpenAI", MagicMock()), patch(
             "lesstokens_sdk.providers.openai.AsyncOpenAI", return_value=mock_client

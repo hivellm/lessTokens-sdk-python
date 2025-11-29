@@ -5,16 +5,16 @@
 **Cobertura de Testes: 98%** ✅ (Meta: 98%)
 - **107 testes passando** (105 unit + 2 novos)
 - **4 testes de integração** (deselecionados, requerem API keys)
-- **13 linhas não cobertas** (principalmente edge cases e erros de importação)
+- **13 linhas não cobertas** (principalmente edge cases e errors de importação)
 
 ## ✅ Quality Checks - Todos Aprovados
 
 ### Linting ✅
-- ✅ Todos os erros corrigidos
+- ✅ Todos os errors corrigidos
 - ✅ Código formatado consistentemente
 
 ### Type Checking ✅
-- ✅ Todos os erros corrigidos
+- ✅ Todos os errors corrigidos
 - ✅ Type safety garantida
 
 ### Testes ✅
@@ -55,9 +55,9 @@
 ## 📝 Notas
 
 As 13 linhas não cobertas são principalmente:
-- Erros de importação (difíceis de testar em unit tests)
+- Errors de importação (difíceis de testar em unit tests)
 - Edge cases muito específicos
-- Caminhos de erro raros
+- Caminhos de error raros
 
 Essas linhas são cobertas por testes de integração ou são casos extremamente raros.
 

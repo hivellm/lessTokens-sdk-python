@@ -29,9 +29,7 @@ class TestProviderFactory:
 
     def test_create_anthropic_provider(self) -> None:
         """Test creating Anthropic provider."""
-        with patch(
-            "lesstokens_sdk.providers.factory.AnthropicProvider"
-        ) as mock_provider:
+        with patch("lesstokens_sdk.providers.factory.AnthropicProvider") as mock_provider:
             mock_instance = mock_provider.return_value
             result = create_provider("anthropic", "test-key")
             assert result == mock_instance
@@ -47,9 +45,7 @@ class TestProviderFactory:
 
     def test_create_deepseek_provider(self) -> None:
         """Test creating DeepSeek provider."""
-        with patch(
-            "lesstokens_sdk.providers.factory.DeepSeekProvider"
-        ) as mock_provider:
+        with patch("lesstokens_sdk.providers.factory.DeepSeekProvider") as mock_provider:
             mock_instance = mock_provider.return_value
             result = create_provider("deepseek", "test-key")
             assert result == mock_instance

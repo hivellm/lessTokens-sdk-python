@@ -29,9 +29,7 @@ class AnthropicProvider(LLMProvider):
             )
         self.client = AsyncAnthropic(api_key=api_key)
 
-    async def chat(
-        self, messages: List[Dict[str, str]], config: LLMConfig
-    ) -> LLMResponse:
+    async def chat(self, messages: List[Dict[str, str]], config: LLMConfig) -> LLMResponse:
         """Send a chat completion request"""
         try:
             model = config["model"]
@@ -60,13 +58,9 @@ class AnthropicProvider(LLMProvider):
             for msg in messages:
                 if msg["role"] == "system":
                     # Anthropic doesn't have system role, convert to user
-                    anthropic_messages.append(
-                        {"role": "user", "content": msg["content"]}
-                    )
+                    anthropic_messages.append({"role": "user", "content": msg["content"]})
                 else:
-                    anthropic_messages.append(
-                        {"role": msg["role"], "content": msg["content"]}
-                    )
+                    anthropic_messages.append({"role": msg["role"], "content": msg["content"]})
 
             response = await self.client.messages.create(
                 model=model,
@@ -92,15 +86,9 @@ class AnthropicProvider(LLMProvider):
                     "TokenUsage",
                     (),
                     {
-                        "prompt_tokens": message.usage.input_tokens
-                        if message.usage
-                        else 0,
-                        "completion_tokens": message.usage.output_tokens
-                        if message.usage
-                        else 0,
-                        "total_tokens": (
-                            message.usage.input_tokens if message.usage else 0
-                        )
+                        "prompt_tokens": message.usage.input_tokens if message.usage else 0,
+                        "completion_tokens": message.usage.output_tokens if message.usage else 0,
+                        "total_tokens": (message.usage.input_tokens if message.usage else 0)
                         + (message.usage.output_tokens if message.usage else 0),
                     },
                 )(),
@@ -152,13 +140,9 @@ class AnthropicProvider(LLMProvider):
             anthropic_messages: List[Dict[str, str]] = []
             for msg in messages:
                 if msg["role"] == "system":
-                    anthropic_messages.append(
-                        {"role": "user", "content": msg["content"]}
-                    )
+                    anthropic_messages.append({"role": "user", "content": msg["content"]})
                 else:
-                    anthropic_messages.append(
-                        {"role": msg["role"], "content": msg["content"]}
-                    )
+                    anthropic_messages.append({"role": msg["role"], "content": msg["content"]})
 
             stream = await self.client.messages.stream(
                 model=model,
@@ -177,9 +161,7 @@ class AnthropicProvider(LLMProvider):
                         if hasattr(event, "delta") and hasattr(event.delta, "type"):  # type: ignore
                             if event.delta.type == "text_delta":  # type: ignore
                                 text = (
-                                    event.delta.text
-                                    if hasattr(event.delta, "text")
-                                    else ""
+                                    event.delta.text if hasattr(event.delta, "text") else ""
                                 )  # type: ignore
                                 if text:
                                     yield StreamChunk(content=text, done=False)
@@ -200,13 +182,9 @@ class AnthropicProvider(LLMProvider):
                                 "TokenUsage",
                                 (),
                                 {
-                                    "prompt_tokens": final_message.usage.input_tokens
-                                    or 0,
-                                    "completion_tokens": final_message.usage.output_tokens
-                                    or 0,
-                                    "total_tokens": (
-                                        final_message.usage.input_tokens or 0
-                                    )
+                                    "prompt_tokens": final_message.usage.input_tokens or 0,
+                                    "completion_tokens": final_message.usage.output_tokens or 0,
+                                    "total_tokens": (final_message.usage.input_tokens or 0)
                                     + (final_message.usage.output_tokens or 0),
                                 },
                             )()
@@ -218,4 +196,3 @@ class AnthropicProvider(LLMProvider):
             raise create_error(
                 ErrorCodes.LLM_API_ERROR, f"Anthropic API error: {message}", None, error
             )
-

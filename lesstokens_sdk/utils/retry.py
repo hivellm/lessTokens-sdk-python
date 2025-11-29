@@ -89,9 +89,7 @@ async def retry(
             last_error = error
 
             # Don't retry if it's the last attempt or error is not retryable
-            if attempt >= retry_config.max_retries or not is_retryable_error(
-                error, retry_config
-            ):
+            if attempt >= retry_config.max_retries or not is_retryable_error(error, retry_config):
                 raise error
 
             # Calculate delay and wait

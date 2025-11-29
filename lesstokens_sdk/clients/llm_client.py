@@ -14,9 +14,7 @@ class LLMClient:
     def __init__(self, provider: str, api_key: str, base_url: Optional[str] = None):
         self.provider = create_provider(provider, api_key, base_url)
 
-    async def chat(
-        self, messages: List[Dict[str, str]], config: LLMConfig
-    ) -> LLMResponse:
+    async def chat(self, messages: List[Dict[str, str]], config: LLMConfig) -> LLMResponse:
         """Send a chat completion request"""
         return await self.provider.chat(messages, config)
 

@@ -11,7 +11,7 @@
 
 ### ✅ Test Coverage: **98%** (Meta: 98%)
 - **570 statements** totais
-- **10 linhas não cobertas** (edge cases e erros de importação)
+- **10 linhas não cobertas** (edge cases e errors de importação)
 - **Status:** ✅ **META ALCANÇADA!**
 
 ### ✅ Test Results
@@ -21,8 +21,8 @@
 - **4 testes de integração** (deselecionados, requerem API keys)
 
 ### ✅ Quality Checks: **TODOS APROVADOS**
-- ✅ **Linting:** Todos os erros corrigidos
-- ✅ **Type Checking:** Todos os erros corrigidos (apenas notas informativas)
+- ✅ **Linting:** Todos os errors corrigidos
+- ✅ **Type Checking:** Todos os errors corrigidos (apenas notas informativas)
 - ✅ **Formatting:** Todos os arquivos formatados
 - ✅ **Coverage:** 98% alcançado
 
@@ -54,9 +54,9 @@
 
 ---
 
-## 🎯 Fases Completadas
+## 🎯 Phases Completadas
 
-### ✅ Fase 1: Implementation (100%)
+### ✅ Phase 1: Implementation (100%)
 - [x] LessTokensSDK completo
 - [x] Suporte para 4 providers (OpenAI, Anthropic, Google, DeepSeek)
 - [x] Multi-turn conversations
@@ -67,23 +67,23 @@
 - [x] Retry logic
 - [x] Type hints completos
 
-### ✅ Fase 2: Testing (100%)
+### ✅ Phase 2: Testing (100%)
 - [x] 112 testes unitários criados
-- [x] Testes para todos os componentes
+- [x] Testes para todos os components
 - [x] Testes de streaming
 - [x] Testes de edge cases
 - [x] Testes de error handling
 - [x] **98% cobertura alcançada** ✅
 
-### ✅ Fase 3: Documentation (100%)
+### ✅ Phase 3: Documentation (100%)
 - [x] Alinhamento com API.md
 - [x] Alinhamento com ARCHITECTURE.md
 - [x] Alinhamento com INTEGRATION.md
 - [x] Exemplos verificados
 
-### ✅ Fase 4: Quality Assurance (100%)
-- [x] Linting: Todos os erros corrigidos
-- [x] Type Checking: Todos os erros corrigidos
+### ✅ Phase 4: Quality Assurance (100%)
+- [x] Linting: Todos os errors corrigidos
+- [x] Type Checking: Todos os errors corrigidos
 - [x] Formatting: Completo
 - [x] Testes: 100% passando
 - [x] **Coverage: 98%** ✅
@@ -100,9 +100,9 @@ As 10 linhas não cobertas são:
 5. `retry.py:101-103` - RuntimeError edge case
 
 **Nota:** Essas linhas são principalmente:
-- Erros de importação (difíceis de testar em unit tests)
+- Errors de importação (difíceis de testar em unit tests)
 - Edge cases muito específicos (RuntimeError no retry)
-- Caminhos de erro raros
+- Caminhos de error raros
 
 Essas linhas são cobertas por testes de integração ou são casos extremamente raros que não afetam a funcionalidade principal.
 

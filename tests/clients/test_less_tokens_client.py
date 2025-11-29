@@ -131,9 +131,7 @@ class TestLessTokensClient:
         mock_response = MagicMock()
         mock_response.is_success = False
         mock_response.status_code = 500
-        mock_response.json.side_effect = Exception(
-            "Invalid JSON"
-        )  # Exception on json()
+        mock_response.json.side_effect = Exception("Invalid JSON")  # Exception on json()
         mock_response.status_code = 500
 
         with patch("httpx.AsyncClient") as mock_client_class:

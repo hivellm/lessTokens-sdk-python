@@ -19,9 +19,7 @@ class CompressionOptions(TypedDict, total=False):
     """Compression options"""
 
     target_ratio: Optional[float]  # Target compression ratio (0.0 to 1.0, default: 0.5)
-    preserve_context: Optional[
-        bool
-    ]  # Preserve context during compression (default: True)
+    preserve_context: Optional[bool]  # Preserve context during compression (default: True)
     aggressive: Optional[bool]  # Use aggressive compression (default: False)
 
 
@@ -52,9 +50,7 @@ class TokenUsage:
     prompt_tokens: int  # Original prompt tokens
     completion_tokens: int  # Completion tokens
     total_tokens: int  # Total tokens
-    compressed_tokens: Optional[int] = (
-        None  # Compressed tokens (if compression was used)
-    )
+    compressed_tokens: Optional[int] = None  # Compressed tokens (if compression was used)
     savings: Optional[float] = None  # Savings percentage (0-100)
 
 
@@ -65,9 +61,7 @@ class ResponseMetadata:
     model: Optional[str] = None  # Model used
     provider: Optional[str] = None  # Provider name
     timestamp: Optional[str] = None  # ISO timestamp
-    compression_ratio: Optional[float] = (
-        None  # Compression ratio (if compression was used)
-    )
+    compression_ratio: Optional[float] = None  # Compression ratio (if compression was used)
 
 
 @dataclass
@@ -96,9 +90,7 @@ class StreamChunk:
 
     content: str  # Chunk content
     done: bool  # Whether this is the final chunk
-    usage: Optional[TokenUsage] = (
-        None  # Usage information (available when done is True)
-    )
+    usage: Optional[TokenUsage] = None  # Usage information (available when done is True)
 
 
 class ProcessPromptOptions(TypedDict, total=False):
@@ -110,4 +102,3 @@ class ProcessPromptOptions(TypedDict, total=False):
     message_role: Optional[str]  # Optional, default: 'user'
     message_content: Optional[Union[str, Callable[[CompressedPrompt], str]]]  # Optional
     messages: Optional[List[Dict[str, str]]]  # Optional, for multi-turn conversations
-

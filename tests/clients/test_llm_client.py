@@ -46,15 +46,11 @@ class TestLLMClient:
             StreamChunk(
                 content="",
                 done=True,
-                usage=TokenUsage(
-                    prompt_tokens=10, completion_tokens=2, total_tokens=12
-                ),
+                usage=TokenUsage(prompt_tokens=10, completion_tokens=2, total_tokens=12),
             ),
         ]
 
-        async def mock_stream(
-            messages: List[Dict[str, str]], config: LLMConfig
-        ) -> StreamChunk:
+        async def mock_stream(messages: List[Dict[str, str]], config: LLMConfig) -> StreamChunk:
             for chunk in mock_chunks:
                 yield chunk
 
@@ -104,9 +100,7 @@ class TestLLMClient:
         """Test initialization with invalid provider."""
         with patch(
             "lesstokens_sdk.clients.llm_client.create_provider",
-            side_effect=LessTokensError(
-                "Invalid provider", ErrorCodes.INVALID_PROVIDER
-            ),
+            side_effect=LessTokensError("Invalid provider", ErrorCodes.INVALID_PROVIDER),
         ):
             with pytest.raises(LessTokensError) as exc_info:
                 LLMClient("invalid", "test-api-key")

@@ -51,9 +51,7 @@ class TestSDKIntegration:
         assert result.ratio > 0
 
     @pytest.mark.asyncio
-    async def test_process_prompt_integration(
-        self, sdk_config: dict, llm_config: dict
-    ) -> None:
+    async def test_process_prompt_integration(self, sdk_config: dict, llm_config: dict) -> None:
         """Test full prompt processing with real APIs."""
         sdk = LessTokensSDK(sdk_config)
         response = await sdk.process_prompt(

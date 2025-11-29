@@ -48,9 +48,7 @@ def validate_config(config: LessTokensConfig) -> None:
 
     if "timeout" in config and config["timeout"] is not None:
         if not isinstance(config["timeout"], int) or config["timeout"] <= 0:
-            raise create_error(
-                ErrorCodes.VALIDATION_ERROR, "Timeout must be a positive number"
-            )
+            raise create_error(ErrorCodes.VALIDATION_ERROR, "Timeout must be a positive number")
 
 
 def validate_prompt(prompt: str) -> None:
@@ -124,13 +122,8 @@ def validate_compression_options(options: CompressionOptions) -> None:
 
     if "preserve_context" in options and options["preserve_context"] is not None:
         if not isinstance(options["preserve_context"], bool):
-            raise create_error(
-                ErrorCodes.VALIDATION_ERROR, "preserve_context must be a boolean"
-            )
+            raise create_error(ErrorCodes.VALIDATION_ERROR, "preserve_context must be a boolean")
 
     if "aggressive" in options and options["aggressive"] is not None:
         if not isinstance(options["aggressive"], bool):
-            raise create_error(
-                ErrorCodes.VALIDATION_ERROR, "aggressive must be a boolean"
-            )
-
+            raise create_error(ErrorCodes.VALIDATION_ERROR, "aggressive must be a boolean")

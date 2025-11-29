@@ -56,4 +56,3 @@ def create_error(
 ) -> LessTokensError:
     """Create error from error code"""
     return LessTokensError(message, code, status_code, details)
-

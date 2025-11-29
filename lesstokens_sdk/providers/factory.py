@@ -12,9 +12,7 @@ from lesstokens_sdk.providers.openai import OpenAIProvider
 from lesstokens_sdk.providers.base import LLMProvider
 
 
-def create_provider(
-    provider: str, api_key: str, base_url: Optional[str] = None
-) -> LLMProvider:
+def create_provider(provider: str, api_key: str, base_url: Optional[str] = None) -> LLMProvider:
     """Creates a provider instance based on the provider name"""
     normalized_provider = provider.lower()
 
@@ -31,4 +29,3 @@ def create_provider(
             ErrorCodes.INVALID_PROVIDER,
             f"Unsupported provider: {provider}. Supported providers: openai, anthropic, google, deepseek",
         )
-

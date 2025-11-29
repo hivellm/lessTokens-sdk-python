@@ -14,9 +14,7 @@ class TestDeepSeekProvider:
 
     def test_init_success(self) -> None:
         """Test provider initialization."""
-        with patch(
-            "lesstokens_sdk.providers.deepseek.AsyncOpenAI"
-        ) as mock_client_class:
+        with patch("lesstokens_sdk.providers.deepseek.AsyncOpenAI") as mock_client_class:
             provider = DeepSeekProvider("test-key")
             assert provider.client is not None
             mock_client_class.assert_called_once_with(
@@ -49,9 +47,7 @@ class TestDeepSeekProvider:
         mock_client = AsyncMock()
         mock_client.chat.completions.create = AsyncMock(return_value=mock_response)
 
-        with patch(
-            "lesstokens_sdk.providers.deepseek.AsyncOpenAI", return_value=mock_client
-        ):
+        with patch("lesstokens_sdk.providers.deepseek.AsyncOpenAI", return_value=mock_client):
             provider = DeepSeekProvider("test-key")
             config: LLMConfig = {"api_key": "test-key", "model": "deepseek-chat"}
             messages = [{"role": "user", "content": "Hello"}]
@@ -72,9 +68,7 @@ class TestDeepSeekProvider:
         mock_client = AsyncMock()
         mock_client.chat.completions.create = AsyncMock(return_value=mock_response)
 
-        with patch(
-            "lesstokens_sdk.providers.deepseek.AsyncOpenAI", return_value=mock_client
-        ):
+        with patch("lesstokens_sdk.providers.deepseek.AsyncOpenAI", return_value=mock_client):
             provider = DeepSeekProvider("test-key")
             config: LLMConfig = {"api_key": "test-key", "model": "deepseek-chat"}
             messages = [{"role": "user", "content": "Hello"}]
@@ -91,9 +85,7 @@ class TestDeepSeekProvider:
         mock_client = AsyncMock()
         mock_client.chat.completions.create = AsyncMock(side_effect=error)
 
-        with patch(
-            "lesstokens_sdk.providers.deepseek.AsyncOpenAI", return_value=mock_client
-        ):
+        with patch("lesstokens_sdk.providers.deepseek.AsyncOpenAI", return_value=mock_client):
             provider = DeepSeekProvider("test-key")
             config: LLMConfig = {"api_key": "test-key", "model": "deepseek-chat"}
             messages = [{"role": "user", "content": "Hello"}]
@@ -107,13 +99,9 @@ class TestDeepSeekProvider:
     async def test_chat_api_error(self) -> None:
         """Test chat with DeepSeek API error."""
         mock_client = AsyncMock()
-        mock_client.chat.completions.create = AsyncMock(
-            side_effect=Exception("API Error")
-        )
+        mock_client.chat.completions.create = AsyncMock(side_effect=Exception("API Error"))
 
-        with patch(
-            "lesstokens_sdk.providers.deepseek.AsyncOpenAI", return_value=mock_client
-        ):
+        with patch("lesstokens_sdk.providers.deepseek.AsyncOpenAI", return_value=mock_client):
             provider = DeepSeekProvider("test-key")
             config: LLMConfig = {"api_key": "test-key", "model": "deepseek-chat"}
             messages = [{"role": "user", "content": "Hello"}]
@@ -148,9 +136,7 @@ class TestDeepSeekProvider:
         mock_client = AsyncMock()
         mock_client.chat.completions.create = AsyncMock(return_value=mock_stream())
 
-        with patch(
-            "lesstokens_sdk.providers.deepseek.AsyncOpenAI", return_value=mock_client
-        ):
+        with patch("lesstokens_sdk.providers.deepseek.AsyncOpenAI", return_value=mock_client):
             provider = DeepSeekProvider("test-key")
             config: LLMConfig = {"api_key": "test-key", "model": "deepseek-chat"}
             messages = [{"role": "user", "content": "Hello"}]
@@ -167,13 +153,9 @@ class TestDeepSeekProvider:
     async def test_chat_stream_api_error(self) -> None:
         """Test streaming with API error."""
         mock_client = AsyncMock()
-        mock_client.chat.completions.create = AsyncMock(
-            side_effect=Exception("Stream error")
-        )
+        mock_client.chat.completions.create = AsyncMock(side_effect=Exception("Stream error"))
 
-        with patch(
-            "lesstokens_sdk.providers.deepseek.AsyncOpenAI", return_value=mock_client
-        ):
+        with patch("lesstokens_sdk.providers.deepseek.AsyncOpenAI", return_value=mock_client):
             provider = DeepSeekProvider("test-key")
             config: LLMConfig = {"api_key": "test-key", "model": "deepseek-chat"}
             messages = [{"role": "user", "content": "Hello"}]

@@ -12,9 +12,7 @@ class LLMProvider(ABC):
     """Base provider interface that all providers must implement"""
 
     @abstractmethod
-    async def chat(
-        self, messages: List[Dict[str, str]], config: LLMConfig
-    ) -> LLMResponse:
+    async def chat(self, messages: List[Dict[str, str]], config: LLMConfig) -> LLMResponse:
         """Send a chat completion request"""
         pass
 
@@ -24,4 +22,3 @@ class LLMProvider(ABC):
     ) -> AsyncIterator[StreamChunk]:
         """Send a streaming chat completion request"""
         pass
-

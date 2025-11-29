@@ -242,17 +242,13 @@ class TestLessTokensSDK:
 
             mock_llm_client = AsyncMock()
 
-            async def mock_stream_gen(
-                messages: List[Dict[str, str]], config: LLMConfig
-            ):
+            async def mock_stream_gen(messages: List[Dict[str, str]], config: LLMConfig):
                 yield StreamChunk(content="Hello", done=False)
                 yield StreamChunk(content=" World", done=False)
                 yield StreamChunk(
                     content="",
                     done=True,
-                    usage=TokenUsage(
-                        prompt_tokens=50, completion_tokens=2, total_tokens=52
-                    ),
+                    usage=TokenUsage(prompt_tokens=50, completion_tokens=2, total_tokens=52),
                 )
 
             # chat_stream is an async generator, returns AsyncIterator directly
@@ -298,9 +294,7 @@ class TestLessTokensSDK:
 
             mock_llm_client = AsyncMock()
 
-            async def mock_stream_gen(
-                messages: List[Dict[str, str]], config: LLMConfig
-            ):
+            async def mock_stream_gen(messages: List[Dict[str, str]], config: LLMConfig):
                 yield StreamChunk(content="Hello", done=False)
                 yield StreamChunk(content=" World", done=False)
                 # Final chunk without usage
@@ -348,16 +342,12 @@ class TestLessTokensSDK:
 
             mock_llm_client = AsyncMock()
 
-            async def mock_stream_gen(
-                messages: List[Dict[str, str]], config: LLMConfig
-            ):
+            async def mock_stream_gen(messages: List[Dict[str, str]], config: LLMConfig):
                 yield StreamChunk(content="Hello", done=False)
                 yield StreamChunk(
                     content="",
                     done=True,
-                    usage=TokenUsage(
-                        prompt_tokens=50, completion_tokens=2, total_tokens=52
-                    ),
+                    usage=TokenUsage(prompt_tokens=50, completion_tokens=2, total_tokens=52),
                 )
 
             # chat_stream is an async generator, returns AsyncIterator directly
@@ -399,16 +389,12 @@ class TestLessTokensSDK:
 
             mock_llm_client = AsyncMock()
 
-            async def mock_stream_gen(
-                messages: List[Dict[str, str]], config: LLMConfig
-            ):
+            async def mock_stream_gen(messages: List[Dict[str, str]], config: LLMConfig):
                 yield StreamChunk(content="Hello", done=False)
                 yield StreamChunk(
                     content="",
                     done=True,
-                    usage=TokenUsage(
-                        prompt_tokens=50, completion_tokens=2, total_tokens=52
-                    ),
+                    usage=TokenUsage(prompt_tokens=50, completion_tokens=2, total_tokens=52),
                 )
 
             # chat_stream is an async generator, returns AsyncIterator directly
@@ -459,9 +445,7 @@ class TestLessTokensSDK:
             mock_client.compress.assert_called_once_with("Test prompt", options)
 
     @pytest.mark.asyncio
-    async def test_compress_prompt_without_options(
-        self, sample_sdk_config: dict
-    ) -> None:
+    async def test_compress_prompt_without_options(self, sample_sdk_config: dict) -> None:
         """Test prompt compression without options."""
         mock_compressed = MagicMock()
         mock_compressed.compressed = "Compressed prompt"

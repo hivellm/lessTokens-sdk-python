@@ -90,9 +90,7 @@ class TestGoogleProvider:
     async def test_chat_api_error(self) -> None:
         """Test chat with Google API error."""
         mock_model = AsyncMock()
-        mock_model.generate_content_async = AsyncMock(
-            side_effect=Exception("API Error")
-        )
+        mock_model.generate_content_async = AsyncMock(side_effect=Exception("API Error"))
 
         with patch("lesstokens_sdk.providers.google.genai") as mock_genai:
             mock_genai.configure = MagicMock()
@@ -181,9 +179,7 @@ class TestGoogleProvider:
     async def test_chat_stream_api_error(self) -> None:
         """Test streaming with API error."""
         mock_model = AsyncMock()
-        mock_model.generate_content_async = AsyncMock(
-            side_effect=Exception("Stream error")
-        )
+        mock_model.generate_content_async = AsyncMock(side_effect=Exception("Stream error"))
 
         with patch("lesstokens_sdk.providers.google.genai") as mock_genai:
             mock_genai.configure = MagicMock()

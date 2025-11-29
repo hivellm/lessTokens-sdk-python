@@ -88,10 +88,10 @@ class LessTokensSDK:
         # Step 2: Send compressed prompt to LLM
         base_url: Optional[str] = options["llm_config"].get("base_url") or options[
             "llm_config"
-        ].get("baseURL")  # type: ignore[assignment]
-        llm_client = LLMClient(
-            self.provider, options["llm_config"]["api_key"], base_url
-        )
+        ].get(
+            "baseURL"
+        )  # type: ignore[assignment]
+        llm_client = LLMClient(self.provider, options["llm_config"]["api_key"], base_url)
 
         # Determine message role and content
         role = options.get("message_role") or "user"
@@ -99,11 +99,7 @@ class LessTokensSDK:
         if callable(message_content):
             content = message_content(compressed)
         else:
-            content = (
-                message_content
-                if message_content is not None
-                else compressed.compressed
-            )
+            content = message_content if message_content is not None else compressed.compressed
 
         # Build messages array - include additional messages if provided, then add the compressed prompt
         messages: List[Dict[str, str]] = []
@@ -176,10 +172,10 @@ class LessTokensSDK:
         # Step 2: Send compressed prompt to LLM with streaming
         base_url: Optional[str] = options["llm_config"].get("base_url") or options[
             "llm_config"
-        ].get("baseURL")  # type: ignore[assignment]
-        llm_client = LLMClient(
-            self.provider, options["llm_config"]["api_key"], base_url
-        )
+        ].get(
+            "baseURL"
+        )  # type: ignore[assignment]
+        llm_client = LLMClient(self.provider, options["llm_config"]["api_key"], base_url)
 
         # Determine message role and content
         role = options.get("message_role") or "user"
@@ -187,11 +183,7 @@ class LessTokensSDK:
         if callable(message_content):
             content = message_content(compressed)
         else:
-            content = (
-                message_content
-                if message_content is not None
-                else compressed.compressed
-            )
+            content = message_content if message_content is not None else compressed.compressed
 
         # Build messages array - include additional messages if provided, then add the compressed prompt
         messages: List[Dict[str, str]] = []
@@ -287,4 +279,3 @@ class LessTokensSDK:
                     savings=round(savings * 100) / 100,
                 ),
             )
-

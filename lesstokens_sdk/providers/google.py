@@ -26,9 +26,7 @@ class GoogleProvider(LLMProvider):
         genai.configure(api_key=api_key)
         self.api_key = api_key
 
-    async def chat(
-        self, messages: List[Dict[str, str]], config: LLMConfig
-    ) -> LLMResponse:
+    async def chat(self, messages: List[Dict[str, str]], config: LLMConfig) -> LLMResponse:
         """Send a chat completion request"""
         try:
             model_name = config["model"]
@@ -82,9 +80,7 @@ class GoogleProvider(LLMProvider):
                     candidate = candidates[0]
                     if hasattr(candidate, "content") and candidate.content:  # type: ignore
                         parts = (
-                            candidate.content.parts
-                            if hasattr(candidate.content, "parts")
-                            else []
+                            candidate.content.parts if hasattr(candidate.content, "parts") else []
                         )  # type: ignore
                         text = "".join(
                             part.text if hasattr(part, "text") else ""
@@ -97,9 +93,7 @@ class GoogleProvider(LLMProvider):
             if hasattr(response, "usage_metadata") and response.usage_metadata:  # type: ignore
                 usage_metadata = response.usage_metadata  # type: ignore
                 prompt_tokens = getattr(usage_metadata, "prompt_token_count", 0) or 0
-                completion_tokens = (
-                    getattr(usage_metadata, "candidates_token_count", 0) or 0
-                )
+                completion_tokens = getattr(usage_metadata, "candidates_token_count", 0) or 0
 
             return LLMResponse(
                 content=text,
@@ -205,4 +199,3 @@ class GoogleProvider(LLMProvider):
             raise create_error(
                 ErrorCodes.LLM_API_ERROR, f"Google API error: {message}", None, error
             )
-

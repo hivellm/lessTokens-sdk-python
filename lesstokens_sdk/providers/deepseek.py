@@ -28,21 +28,15 @@ class DeepSeekProvider(LLMProvider):
             )
         self.client = AsyncOpenAI(api_key=api_key, base_url="https://api.deepseek.com")
 
-    async def chat(
-        self, messages: List[Dict[str, str]], config: LLMConfig
-    ) -> LLMResponse:
+    async def chat(self, messages: List[Dict[str, str]], config: LLMConfig) -> LLMResponse:
         """Send a chat completion request"""
         try:
             model = config["model"]
             temperature = config.get("temperature")
             max_tokens = config.get("max_tokens") or config.get("maxTokens")
             top_p = config.get("top_p") or config.get("topP")
-            frequency_penalty = config.get("frequency_penalty") or config.get(
-                "frequencyPenalty"
-            )
-            presence_penalty = config.get("presence_penalty") or config.get(
-                "presencePenalty"
-            )
+            frequency_penalty = config.get("frequency_penalty") or config.get("frequencyPenalty")
+            presence_penalty = config.get("presence_penalty") or config.get("presencePenalty")
             stop = config.get("stop")
 
             # Get all other options
@@ -68,9 +62,7 @@ class DeepSeekProvider(LLMProvider):
 
             response = await self.client.chat.completions.create(
                 model=model,
-                messages=[
-                    {"role": msg["role"], "content": msg["content"]} for msg in messages
-                ],
+                messages=[{"role": msg["role"], "content": msg["content"]} for msg in messages],
                 temperature=temperature,
                 max_tokens=max_tokens,
                 top_p=top_p,
@@ -83,9 +75,7 @@ class DeepSeekProvider(LLMProvider):
             completion = response
             choice = completion.choices[0] if completion.choices else None
             if not choice or not choice.message:
-                raise create_error(
-                    ErrorCodes.LLM_API_ERROR, "No response from DeepSeek"
-                )
+                raise create_error(ErrorCodes.LLM_API_ERROR, "No response from DeepSeek")
 
             return LLMResponse(
                 content=choice.message.content or "",
@@ -93,15 +83,11 @@ class DeepSeekProvider(LLMProvider):
                     "TokenUsage",
                     (),
                     {
-                        "prompt_tokens": completion.usage.prompt_tokens
-                        if completion.usage
-                        else 0,
-                        "completion_tokens": completion.usage.completion_tokens
-                        if completion.usage
-                        else 0,
-                        "total_tokens": completion.usage.total_tokens
-                        if completion.usage
-                        else 0,
+                        "prompt_tokens": completion.usage.prompt_tokens if completion.usage else 0,
+                        "completion_tokens": (
+                            completion.usage.completion_tokens if completion.usage else 0
+                        ),
+                        "total_tokens": completion.usage.total_tokens if completion.usage else 0,
                     },
                 )(),
                 metadata=type(
@@ -131,12 +117,8 @@ class DeepSeekProvider(LLMProvider):
             temperature = config.get("temperature")
             max_tokens = config.get("max_tokens") or config.get("maxTokens")
             top_p = config.get("top_p") or config.get("topP")
-            frequency_penalty = config.get("frequency_penalty") or config.get(
-                "frequencyPenalty"
-            )
-            presence_penalty = config.get("presence_penalty") or config.get(
-                "presencePenalty"
-            )
+            frequency_penalty = config.get("frequency_penalty") or config.get("frequencyPenalty")
+            presence_penalty = config.get("presence_penalty") or config.get("presencePenalty")
             stop = config.get("stop")
 
             # Get all other options
@@ -162,9 +144,7 @@ class DeepSeekProvider(LLMProvider):
 
             stream = await self.client.chat.completions.create(
                 model=model,
-                messages=[
-                    {"role": msg["role"], "content": msg["content"]} for msg in messages
-                ],
+                messages=[{"role": msg["role"], "content": msg["content"]} for msg in messages],
                 temperature=temperature,
                 max_tokens=max_tokens,
                 top_p=top_p,
@@ -200,4 +180,3 @@ class DeepSeekProvider(LLMProvider):
             raise create_error(
                 ErrorCodes.LLM_API_ERROR, f"DeepSeek API error: {message}", None, error
             )
-

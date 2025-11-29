@@ -26,9 +26,7 @@ class TestErrors:
 
     def test_create_error(self) -> None:
         """Test create_error helper function."""
-        error = create_error(
-            ErrorCodes.VALIDATION_ERROR, "Test error", 400, {"key": "value"}
-        )
+        error = create_error(ErrorCodes.VALIDATION_ERROR, "Test error", 400, {"key": "value"})
         assert isinstance(error, LessTokensError)
         assert error.code == ErrorCodes.VALIDATION_ERROR
         assert error.message == "Test error"

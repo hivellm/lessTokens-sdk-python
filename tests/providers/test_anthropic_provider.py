@@ -14,9 +14,7 @@ class TestAnthropicProvider:
 
     def test_init_success(self) -> None:
         """Test provider initialization."""
-        with patch(
-            "lesstokens_sdk.providers.anthropic.AsyncAnthropic"
-        ) as mock_client_class:
+        with patch("lesstokens_sdk.providers.anthropic.AsyncAnthropic") as mock_client_class:
             provider = AnthropicProvider("test-key")
             assert provider.client is not None
             mock_client_class.assert_called_once_with(api_key="test-key")
